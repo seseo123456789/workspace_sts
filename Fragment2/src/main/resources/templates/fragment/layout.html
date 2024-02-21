@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+                >
+ <head>
+ <meta charset="UTF-8">
+<title></title>
+
+<th:block layout:fragment="content_css"></th:block>
+
+<style>
+    h3{
+        background-color: rgb(203, 140, 248); 
+    }
+</style>
+</head>
+<body>
+    <h3 class="test">여기는 layout 파일이에용~</h3>
+   <div>
+    <th:block th:replace="~{fragment/menu::headerMenu}"></th:block>
+   </div>
+
+   <div>
+    <th:block th:replace="~{fragment/side_menu::sideMenu}"></th:block>
+    </div>
+   <div>
+    <th:block layout:fragment="detailContent"></th:block>
+   </div>
+   <div>
+    <th:block th:replace="~{fragment/footer::footerMenu}"></th:block>
+   </div>
+</body>
+</html>

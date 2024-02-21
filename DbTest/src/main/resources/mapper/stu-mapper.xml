@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- 모든 쿼리에는 ; 을 붙히지 않는다 -->
+<mapper namespace="stuMapper">
+
+<!-- 'HeidiSQL'의 STUDENT 테이블과 '자바'의 StudentVO를 연결하는 resultMap-->
+
+    <!--  column : 연결할 'HeidiSQL'의 테이블의 컬럼명   -->
+    <!--  property: 연결할 테이블의 컬럼과 연결할 '자바'의 클래스 안의 변수명 -->
+    <!--  resultMap 의 type : 패키지명+ 선언된 변수있는 클래스명 -->
+    <resultMap id="stu" type="com.green.DbTest.vo.StudentVO">
+
+        <result column="STU_NO"     property="stuNo" />
+        <result column="STU_NAME"   property="stuName" />
+        <result column="SCORE"      property="score" />
+        <result column="ADDR"       property="addr" />
+
+    </resultMap>
+
+    <insert id="insertStudent">
+        INSERT INTO STUDENT (
+            STU_NO
+            , STU_NAME
+            , SCORE
+            , ADDR
+        ) VALUES(
+            11
+            , '이순신'
+            , 95
+            , '부산'
+        )
+    </insert>
+
+  <!-- 한명 삭제하는 쿼리-->
+    <delete id="deleteStudent">
+        DELETE FROM STUDENT
+        WHERE STU_NO=11
+    </delete>
+
+
+    <delete id="delete">
+        DELETE FROM STUDENT
+        WHERE STU_NO= #{stuNo}
+    </delete>
+
+<!--  resultType : 자바에서 기본으로 제공하는 자료형
+      resultMap  : 개발자가 직접 만든 자료형
+-->
+    <select id="selectName" resultType="String">
+        SELECT STU_NAME
+        FROM STUDENT
+        WHERE STU_NO=1
+    </select>
+
+        <select id="selectScore" resultType="int">
+            SELECT SCORE
+            FROM STUDENT
+            WHERE STU_NO=1
+        </select>
+
+<!-- resultMap 정의 맨위에 있음   -->
+        <select id="selectStu" resultMap="stu">
+            SELECT STU_NO
+                , STU_NAME
+                , SCORE
+                , ADDR
+            FROM STUDENT
+            WHERE STU_NO=1
+        </select>
+
+        <select id="selectStuList" resultMap="stu">
+            SELECT STU_NO
+            , STU_NAME
+            , SCORE
+            , ADDR
+            FROM STUDENT
+        </select>
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

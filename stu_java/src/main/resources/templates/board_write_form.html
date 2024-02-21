@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+
+
+    <form action="boardWrite" method="post"> <br>
+    글번호: <input type="text" name="boardNum"> <br>
+    제목:   <input type="text" name="boardTitle"> <br>
+    작성자: <input type="text" name="writer"> <br>
+    작성일: <input type="date" name="createDate"> <br>
+    내용: <textarea name= "boardContent" cols="30" rows="10"></textarea> <br>
+            <input type="submit" value="글등록">
+     </form>
+</body>
+</html>

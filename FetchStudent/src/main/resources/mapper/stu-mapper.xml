@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="stuMapper">
+                <resultMap id="stuResult" type="com.green.FetchStudent.vo.StuVo">
+                    <id     column="STU_NUM"    property="stuNum"/>
+                    <result column="STU_NAME"   property="stuName"/>
+                    <result column="CLASS_CODE" property="classCode"/>
+                    <result column="CLASS_NAME" property="className"/>
+                </resultMap>
+
+                <resultMap id="classResult" type="com.green.FetchStudent.vo.ClassVo">
+                    <id     column="CLASS_CODE"   property="classCode"/>
+                    <result column="CLASS_NAME"   property="className"/>
+                </resultMap>
+
+    <resultMap id="scoreResult" type="com.green.FetchStudent.vo.ScoreVo">
+        <id     column="SCORE_NUM"      property="scoreNum"/>
+        <result column="KOR_SCORE"      property="korScore"/>
+        <result column="ENG_SCORE"      property="engScore"/>
+        <result column="MATH_SCORE"     property="mathScore"/>
+        <result column="STU_NUM"        property="stuNum"/>
+    </resultMap>
+
+
+    <select id="selectClassList" resultMap="classResult">
+        SELECT
+        CLASS_CODE
+        , CLASS_NAME
+        FROM CLASS_INFO
+        ORDER BY CLASS_CODE ASC
+    </select>
+
+
+
+    <!--학생조회-->
+        <select id="selectStuList" resultMap="stuResult">
+            SELECT
+                CLASS_NAME
+                , STU_NUM
+                , STU_NAME
+            FROM STUDENT_INFO S
+            INNER JOIN CLASS_INFO C
+            ON S.CLASS_CODE =C.CLASS_CODE
+            <if test="classCode!=0">
+            WHERE S.CLASS_CODE= #{classCode}
+            </if>
+            ORDER BY C.CLASS_CODE, STU_NUM
+        </select>
+
+    <!--학생 상세 정보 조회-->
+    <select id="detailStu" resultMap="stuResult">
+        SELECT
+            STU_NUM
+            , CLASS_NAME
+            , STU_NAME
+        FROM STUDENT_INFO S
+        INNER JOIN CLASS_INFO C
+        ON S.CLASS_CODE =C.CLASS_CODE
+        WHERE STU_NUM= #{stuNum}
+    </select>
+
+    <!--점수 정보 조회-->
+    <select id="selectScoreInfo" resultMap="scoreResult">
+        SELECT
+            KOR_SCORE
+            ,ENG_SCORE
+            ,MATH_SCORE
+        FROM STU_SCORE
+        WHERE STU_NUM=#{stuNum}
+    </select>
+
+    <!--점수 저장-->
+    <insert id="insertScore">
+        INSERT INTO STU_SCORE(
+             KOR_SCORE
+            , ENG_SCORE
+            , MATH_SCORE
+            , STU_NUM
+        )VALUES(
+             #{korScore}
+            , #{engScore}
+            , #{mathScore}
+            , #{stuNum}
+        )
+    </insert>
+
+
+
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

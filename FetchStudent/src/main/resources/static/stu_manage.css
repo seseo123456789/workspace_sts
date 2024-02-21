@@ -1,0 +1,25 @@
+.box{border:1px solid black; 
+    width: 90%; margin: 0 auto; background-color:rgb(253, 219, 219);
+     border-collapse:collapse; text-align: center; }
+      
+#stu-list-div{width:380px; border-collapse:collapse; margin:0 auto; 
+                margin-top:10px ; background-color: white;
+                border: 1px solid black;    }
+
+    /*  >  : 자식태그   #box : # 아이디 */
+    /*  ' '  : 자손태그(한칸띄우기) /  .box tr(){boarder:1px;}    */         
+.box>tbody>tr, .box>tbody>tr>td {border:1px solid black; height: 500px; }
+#stu-list-div tr, #stu-list-div td {border:1px solid black;} 
+#stu-list-div tr:hover{background-color: rgb(247, 150, 239);}
+
+.stu-detail-div table{
+        width: 90%; margin: 0 auto; border: 1px solid black; border-collapse: collapse;
+        text-align: center; }
+
+
+.stu-detail-div table tr, .stu-detail-div table td{border: 1px solid black; background-color: white; }
+
+.stu-detail-div > div:first-child{margin-bottom: 120px;}
+
+#name-span:hover{cursor: pointer;}
+.scoreInput{width: 50px;}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+                layout:decorate="~{fragment/layout}">
+
+<th:block layout:fragment="content_css">
+     <link rel="stylesheet" href="/css/menu.css">
+</th:block>
+
+
+    <th:block  layout:fragment="detailContent">
+        여기는 list.html 입니다다다 <br>
+        <a href="/detail">detail html 이동합니다~</a>
+    </th:block>
+
+    <th:block layout:fragment="content_js">
+        <script src="/detail.js"></Script>
+   </th:block>    
+</html>

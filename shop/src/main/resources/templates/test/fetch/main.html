@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>document</title>
+<Style>
+    div{
+        margin-bottom: 16px;
+    }
+</Style>
+</head>
+<body>
+    <h3>Fetch를 통한 Javascript 데이터를 controller에서 받기</h3>
+        <div>
+            <input type="button" value="memberVO객체로 데이터 전달받기 1" onclick="fetch1()">
+        </div>
+        <div>
+            <input type="button" value="map을 사용해서 데이터 전달받기 2" onclick="fetch2()">
+        </div>
+        <div>
+            <input type="button" value="배열데이터를 list 데이터로 전달받기 3" onclick="fetch3()">
+        </div>
+        <div>
+            <input type="button" value="배열데이터를 list 데이터로 전달받기 4" onclick="fetch4()">
+        </div>
+</body>
+<script src="/js/test/fetch.js"></script>
+</html>

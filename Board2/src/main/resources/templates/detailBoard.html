@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+    <style>
+        .box{ 
+        width: 600px;
+        margin: 0 auto;}
+        table{
+            border:1px solid black;
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;}
+        tr,td{border: 1px solid black;}
+        .boxTwo{width:180px; margin:0 auto}
+        .btn-div{text-align: center; margin-top: 100px;}
+    </style> 
+
+
+</head>
+<body>
+    <div class="box">
+  <table>
+    <tr>
+        <td>글번호</td>
+        <td>[[${board.boardNum}]]</td>
+        <td>작성자</td>
+        <td>[[${board.writer}]]</td>
+        <td>작성일</td>
+        <td>[[${board.createDate}]]</td>
+        <td>조회수</td>
+        <td>[[${board.readCnt}]]</td>
+    </tr>
+
+    <tr >
+        <td>제목</td>
+        <td colspan="7">[[${board.title}]] </td>
+    </tr>
+    
+    <tr>
+        <td>내용</td>
+        <td colspan="7">[[${board.content}]]</td>
+    </tr>
+
+</table>
+    <!--<div class="BoxTwo">-->
+
+        <input type="button" value="뒤로" onclick="history.go(-1)">    
+        <!--삭제방식2 <input type="button" value="뒤로" onclick="lcation.href='/board/list'">-->
+         
+        <th:block th:unless="${session.loginInfo==null}">              
+                <th:block th:if="${session.loginInfo.memberId==board.writer or session.loginInfo.isAdmin=='Y'}">
+                    <input type="button" value="수정" th:onclick="changeBoard([[${board.boardNum}]])">
+                    <input type="button" value="삭제" th:onclick="deleteboard([[${board.boardNum}]])">
+                </th:block>
+            </th:block>
+       
+    <!--댓글-->
+    
+        <form action="/reply/replyInsert" method="post">
+        
+                <input type="hidden" name="boardNum" th:value="${board.boardNum}"> 
+                <input type="hidden" name="writer" th:value="${board.writer}"> 
+                 <input type="text" name="content">
+                   <input type="submit" value="등록" > <br>
+        </form>
+    <div th:each="reply :${detailReply}">
+        <div>[[${reply.writer}]]</div>
+        <div>[[${reply.createDate}]]</div>
+        <div>[[${reply.content}]]</div>
+        <th:block th:unless="${session.loginInfo==null}">   
+            <th:block th:if="${session.loginInfo.memberId==reply.writer or session.loginInfo.isAdmin=='Y'}">
+                <input type="button" value="삭제" th:onclick="|location.href='@{/reply/replyDelete(replyNum=${reply.replyNum}, boardNum=${reply.boardNum})}'|" >
+            </th:block>
+        </th:block>
+    </div>
+
+
+
+
+
+
+    <script> 
+         function deleteboard(boardNum){
+            location.href='/board/goDelete?boardNum='+boardNum};
+        //location.href=`/board/goDelete?boardNum=${boardNum}`; 추천
+
+        function changeBoard(boardNum){
+            location.href='/board/boardUpdate?boardNum='+boardNum};
+
+          
+
+
+    // ***변수 선언***
+        // 1.기존에 쓰던 변수 선언 문법
+        // var a; 
+        // var aa=10;
+        // var bb='java';
+
+        //2. 추천 변수 선언 문법
+        //const b=10; //변하지 않는 값을 저장할 때 사용
+        // b=20; 오류발생
+        
+        //let c=10; //변하는 값을 저장할 때 사용
+        //c=20;   
+        // ex) function changeBoard(let boardNum)  : let 이 생략되서 실제씀 
+
+        const name='홍';
+        const num1=10;
+        const num2=20;
+      console.log('안녕하세요~')
+      console.log(name+'이라는 사람은 국어점수가'+num1+'영어점수가'+num2+'입니다')
+      console.log(`~${name}이라는 사람은 국어점수가 ${num1}`);
+
+    </script>
+
+</div>
+</body>
+
+
+</html>

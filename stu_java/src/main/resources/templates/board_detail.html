@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+    <style>
+        .container{ 
+        width: 600px;
+        margin: 0 auto;}
+        table{
+            border:1px solid black;
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;}
+        tr,td{border: 1px solid black;}
+        .btn-div{text-align: center; margin-top: 100px;}
+        .containerTwo{ width:180px; margin:0 auto }
+
+    </style>
+
+</head>
+<body>
+    <form action="boardUpdate" method="post">
+    <div class="container">
+    <table>
+        <tr>
+            <td>글번호</td>
+            <td>[[${boardInfo.boardNum}]]</td>
+            <td>작성자</td>
+            <td>[[${boardInfo.writer}]]</td>
+            <td>작성일</td>
+            <td>[[${boardInfo.createDate}]]</tr>
+        </tr>
+            
+        
+        <tr>
+            <td>제목</td>
+            <td colspan="5">[[${boardInfo.boardTitle}]]</td>
+        </tr>
+        
+        
+        <tr>
+            <td>내용</td>
+            <td colspan="5">[[${boardInfo.boardContent}]]</td>
+        </tr>
+    </table>
+</div>
+    <br>
+
+    <div class="containerTwo">
+        <tr class="btn-div">
+            <td><input type="button" value="뒤로가기" onclick="history.go(-1)"></td>
+            <td><input type="button" value="수정" th:onclick="|location.href='@{boardUpdate(boardNum=${boardInfo.boardNum})}'|"></td>
+            <td><input type="button" value="삭제" th:onclick="|location.href='@{boardDelete(boardNum=${boardInfo.boardNum})}'|"></td>
+        </tr>
+    </div>
+</form>
+
+</body>
+
+</html>

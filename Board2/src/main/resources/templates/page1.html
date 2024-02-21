@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+ <h3>page 1 입니다</h3><br>
+ [[${session.name}]]<br>
+ [[${session.age}]]<br>
+ [[${session.member.memberName}]]<br>
+ <a href="/test/page2">page2 이동</a>
+</body>
+</html>

@@ -1,0 +1,32 @@
+/* 모든 html에서 공통적으로 적용되는 css */
+
+@font-face {
+    font-family: 'TAEBAEKfont';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/TAEBAEKfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.container-fluid{
+    width: 80%;
+}
+
+body{
+    font-family: 'TAEBAEKfont';
+    font-size: 15pt;
+}
+/* 쇼핑몰 제목 크기변경 */
+.main-title{
+    font-size: 50pt;
+}
+
+.modal-title{font-size: 30pt;}
+
+.point-span:hover{
+    cursor: pointer;
+   
+}
+
+.header-div{
+    margin-bottom: 3em;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+    .box{width: 500px; margin: 0 auto; background-color: bisque;}
+    table { width: 100%; border: 1px solid black; border-collapse: collapse; text-align: center; }
+    tr,td {border: 1px solid black; text-align: center;}
+</style>
+
+</head>
+<body>
+
+    <div class="box">
+
+        <!--로그인 입장시-->
+        <th:block th:unless="${session.loginInfo==null}">   
+            [[${session.loginInfo.memberName}]]님 반갑습니다  <a href="/member/logout">Logout</a>
+        </th:block>
+        
+        <th:block th:if="${session.loginInfo==null}">
+            <a href="/member/loginForm">login</a>
+        </th:block>
+
+
+        <!--검색-->
+        <div>
+            <form action="/board/list" method="post">
+                <select name="searchType">
+                    <!--이전 list.html에서 제목을 선택시, 새창에 제목이 선택되어져 있기-->
+                    <!--이전 list.html에서 작성자를 선택시, 새창에 작성자 선택되어져있기-->
+                    <option value="TITLE" th:selected="${searchVo.searchType==null or searchVo.searchType == 'TITLE'}">제목</option>
+                    <option value="WRITER" th:selected="${searchVo.searchType == 'WRITER'}">작성자</option>
+                </select>
+                    <input type="text" name="searchValue" th:value="${searchVo.searchValue}">
+                    <input type="submit" value="검색">
+            </form>    
+        </div>
+
+        <!--목록-->
+        <table>
+            <tr>
+                <td>글번호</td>
+                <td>글제목</td>
+                <td>작성자</td>
+                <td>작성일</td>
+                <td>조회수</td>
+            </tr>
+
+            <th:block th:each=" list : ${list}">
+               <tr> 
+                    <td>[[${list.boardNum}]]</td>
+                    
+                    <td>
+                        <a th:href="@{/board/boardDetail(boardNum=${list.boardNum})}">
+                            [[${list.title}]]
+                        </a>
+                    </td>
+                    <td>[[${list.writer}]]</td>
+                    <td>[[${list.createDate}]]</td>
+                    <td>[[${list.readCnt}]]</td>
+                </tr>
+            </th:block> 
+        </table>
+            <!-- 페이징 코드 -->
+            <div>
+        
+                <th:block th:if="${searchVo.prev}"> 
+                   <a th:href="@{/board/list(nowPage=${searchVo.beginPage-1})}"> 이전 </a>
+                </th:block>
+
+                    <th:block th:each="i : ${#numbers.sequence(searchVo.beginPage, searchVo.endPage)}">
+                       <a th:href="@{/board/list(nowPage=${i})}" > [[${i}]] </a>
+                    </th:block>
+
+                <th:block th:if="${searchVo.next}"> 
+                    <a th:href="@{/board/list(nowPage=${searchVo.endPage + 1})}"> 다음 </a>
+                </th:block>
+            </div>
+        
+        <input th:unless="${session.loginInfo==null}" type="button" value="글쓰기" onclick="goWrite()">
+  
+
+        <script>
+            function goWrite(){
+                location.href='/board/goWrite'
+            }   
+
+        </script>
+
+    </div>
+</body>
+</html>

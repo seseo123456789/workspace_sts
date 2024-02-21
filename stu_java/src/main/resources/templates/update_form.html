@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+    <form action="update" method="post">
+    글번호: <input type="text" name="boardNum" th:value="${view.boardNum}" readonly> <br>
+    제목:   <input type="text" name="boardTitle" th:value="${view.boardNum}" > <br>
+    작성자: <input type="text" name="writer" th:value="${view.writer}" readonly> <br>
+    작성일: <input type="date" name="createDate" th:value="${view.createDate}" readonly> <br>
+    내용: <textarea name= "boardContent" cols="30" rows="10" >[[${view.boardContent}]]</textarea>
+            <input type="submit" value="글수정">
+   </form>
+</body>
+</html>

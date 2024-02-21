@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+
+    layout.html 파일입니다.
+    
+    <div>
+        <!-- fragment 폴더 안의 header.html로 영역을 대체하겠다 -->
+        <!-- fragment 폴더 안의 header.html를 앞으로 headerFragment라고 부르겠다-->
+       <th:block th:replace="~{fragment/header::headerFragment}"></th:block>
+    </div>
+
+    <div>
+        <th:block th:replace="~{fragment/side::sideFragment}"></th:block>
+    </div>
+
+    <div>
+        <th:block layout:fragment="contentFragment"></th:block>
+    </div>
+  
+
+</body>
+</html>
